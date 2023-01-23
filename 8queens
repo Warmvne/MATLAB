@@ -1,3 +1,5 @@
+///////////////// Find one solution //////////////////////
+
 found=0;
 n=0;
 while found==0,
@@ -25,3 +27,19 @@ while found==0,
 end
 n
 A
+
+
+
+/////////////////// Find all solutions //////////////////////
+
+function M = eightqueens()
+N=8;
+T=N-2;
+rows=1:N;
+cols=perms(rows);
+S=size(cols,1);
+M=zeros(N,N,S);
+linearInd = sub2ind(size(M), repmat(rows',1,S), cols', repmat(1:S,N,1));
+M(linearInd) = 1;
+dv=arrayfun(@(k)max([arrayfun(@(x)sum(diag(M(:,:,k),x)),-T:T),arrayfun(@(x)sum(diag(rot90(M(:,:,k)),x)),-T:T)]),1:S);
+M(:,:,dv>1)=[];
