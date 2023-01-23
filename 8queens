@@ -1,0 +1,27 @@
+found=0;
+n=0;
+while found==0,
+    n=n+1;
+    %randomly place queens on chessboard
+    A=eye(8);
+    A(randperm(8),:)=A;
+    
+    %check diagonals
+    for i=-7:7,
+        leftDiag(i+8)=sum(diag(A,i));
+    end
+    
+    A=flip(A);
+    for i=-7:7,
+        rightDiag(i+8)=sum(diag(A,i));
+    end
+    
+    A=flip(A);
+    
+    if sum((leftDiag>1))==0 && sum((rightDiag>1))==0,
+        found=1;
+        
+    end
+end
+n
+A
