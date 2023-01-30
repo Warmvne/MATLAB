@@ -1,0 +1,14 @@
+I=imread('lena.png');
+image(I);
+I(1,2,3);
+%image(I(100:200,100:200,:));
+GI=rgb2gray(I);
+image(GI);
+%imshow(GI);
+%colorbar;
+%colormap;
+%colormap(hsv);
+%colormap(flag);
+%colormap(gray);
+%imagesc(imrotate(I,45));
+imagesc(imresize(I,[100 100]));
