@@ -17,6 +17,7 @@ Crop=imrotate(I,angle,'crop');
 R=[cosd(angle) sind(angle);-sind(angle) cosd(angle)];
 newcL=R*(cL-flip(size(rgb2gray(I)))/2)'+(flip(size(rgb2gray(I)))/2)';
 newcR=R*(cR-flip(size(rgb2gray(I)))/2)'+(flip(size(rgb2gray(I)))/2)';
+image(Crop);
 
 %vérification des nouvelles coordonnées
 hold on;
@@ -24,8 +25,10 @@ plot(newcL(1),newcL(2),'go');
 plot(newcR(1),newcR(2),'bo');
 hold off;
 
-s=sqrt(((newcL(1)-newcR(1))^2)+(newcL(2)-newcR(2))^2);
-Crop=imcrop(Crop,[cL(1)-(s/2) cL(1)-(s/2) 2*s 2*s]);
+s=sqrt(((newcR(1)-newcL(1))^2)+(newcR(2)-newcL(2))^2);
+%Crop=imcrop(Crop,[cL(1)-(s/2) cL(1)-(s/2) 2*s 2*s]);
+Crop=imcrop(Crop,[newcL(1)-s/2 newcL(2)-s/2 2*s 2*s]);
 Crop=imresize(Crop,[100,100]);
+image(Crop);
 
 end
